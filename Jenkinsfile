@@ -1,18 +1,15 @@
 pipeline {
     agent any
-
-environment {
-    IMAGE_NAME = 'gaurav987321/my-first-image'   // Replace with your actual values
-    CREDENTIALS_ID = 'dockerhub-creds'        // ID from Jenkins credentials
-}
-
+    environment {
+        IMAGE_NAME = 'gaurav987321/my-first-image'
+        CREDENTIALS_ID = 'dockerhub-creds'
+    }
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/GauravPudasaini/Jenkins_Project.git'  // Replace with your GitHub repo
+                git branch: 'main', url: 'https://github.com/GauravPudasaini/Jenkins_Project.git'
             }
         }
-
         stage('Build Docker Image') {
             steps {
                 script {
@@ -20,7 +17,6 @@ environment {
                 }
             }
         }
-
         stage('Push to Docker Hub') {
             steps {
                 script {
